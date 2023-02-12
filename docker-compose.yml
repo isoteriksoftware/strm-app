@@ -1,0 +1,13 @@
+version: "3"
+services:
+  strm:
+    image: strm
+    build:
+      context: ./strm
+      dockerfile: Dockerfile
+    container_name: strm
+    ports:
+      - "4000:80"
+    environment:
+      - PORT=80
+    restart: "no"
