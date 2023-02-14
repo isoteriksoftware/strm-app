@@ -1,5 +1,19 @@
 version: "3"
 services:
+  azure-storage:
+    image: azure-storage
+    build:
+      context: ./azure-storage
+      dockerfile: Dockerfile
+    container_name: strm-storage
+    ports:
+      - "4000:80"
+    environment:
+      - PORT=80
+      - STORAGE_ACCOUNT_NAME=strrm
+      - STORAGE_ACCESS_KEY=28joyt9F20fqesWxz9Cdu1vt8yUYNYjNH99llEaq1kTqAC/ba+IuUhELd91CqRdV/kJisfvfzOsb+AStAdh4MQ==
+    restart: "no"
+
   strm:
     image: strm
     build:
@@ -7,7 +21,9 @@ services:
       dockerfile: Dockerfile
     container_name: strm
     ports:
-      - "4000:80"
+      - "4001:80"
     environment:
       - PORT=80
+      - VIDEO_STORAGE_HOST=strm-storage
+      - VIDEO_STORAGE_PORT=80
     restart: "no"
